@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PhishGuard AI | CyberDudeBivash</title>
+    <style>
+        body { font-family: Arial; background:#0f172a; color:#e5e7eb; }
+        textarea { width:100%; height:180px; }
+        .box { background:#020617; padding:20px; border-radius:8px; }
+        .high { color:#ef4444; }
+        .medium { color:#f59e0b; }
+        .low { color:#22c55e; }
+        button { padding:10px 20px; background:#2563eb; color:white; border:none; }
+        ul { margin-left:20px; }
+    </style>
+</head>
+<body>
+
+<h2>🛡️ PhishGuard AI</h2>
+<p>Phishing Detection & Incident Triage — CyberDudeBivash</p>
+
+<div class="box">
+    <form method="POST">
+        <label>Paste suspicious email content or URL:</label><br><br>
+        <textarea name="content" required></textarea><br><br>
+        <button type="submit">Analyze</button>
+    </form>
+</div>
+
+{% if result %}
+<br>
+<div class="box">
+    <h3>Risk Level:
+        <span class="{{ result.risk|lower }}">{{ result.risk }}</span>
+    </h3>
+
+    <p><b>Indicators:</b> {{ result.keywords }}</p>
+
+    <p><b>IOCs:</b></p>
+    <ul>
+        <li>URLs: {{ result.iocs.urls }}</li>
+        <li>Domains: {{ result.iocs.domains }}</li>
+        <li>IPs: {{ result.iocs.ips }}</li>
+    </ul>
+
+    <p><b>Recommended Actions:</b></p>
+    <ul>
+        {% for action in result.actions %}
+            <li>{{ action }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<p style="margin-top:30px;font-size:12px;">
+© CyberDudeBivash Pvt Ltd | Local analysis — no data stored
+</p>
+
+</body>
+</html>

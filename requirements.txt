@@ -1,0 +1,9 @@
+flask
+rich
+requests
+tldextract
+
+
+
+
+
